@@ -12,6 +12,7 @@ The following dependencies need to be installed:
 ```
 sudo apt-get install libusb-1.0-0.dev
 sudo pip3 install git+https://github.com/LukePrior/microwave_usb_fan
+sudo pip3 install Flask
 ```
 
 The script can be run with:
