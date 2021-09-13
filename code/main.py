@@ -1,9 +1,12 @@
 #!/usr/bin/python
 
-import argparse
 import RPi.GPIO as GPIO
 from time import sleep
 from usbfan import Device, Program, TextMessage
+from flask import Flask, render_template, request
+
+# Configure website
+app = Flask(__name__)
 
 
 # Power fan on/off
@@ -27,25 +30,33 @@ def set_text(text):
     GPIO.output(18, 1)
 
 
-# Configure relay
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(18, GPIO.OUT)
+# Serve Website
+@app.route('/')
+def website():
+    GPIO.setwarnings(False)
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(18, GPIO.OUT)
+    return render_template('main.html')
 
-# Parse Arguments
-parser = argparse.ArgumentParser()
-parser.add_argument("--text", "-t", help="set text to be displayed")
-parser.add_argument("--power", "-p", help="enable/disable fan")
-args = parser.parse_args()
 
-if args.power:
-    if args.power == "on" or args.power == "off":
-        change_power(args.power)
-        exit()
+# Update text
+@app.route('/', methods=['POST'])
+def website_set_text():
+    text = request.form['text']
+    set_text(text)
+    return website()
 
-if args.text:
-    text = str(args.text)
-else:
-    text = "DIYODE"
+# Power off
+@app.route('/off')
+def website_power_off():
+    change_power("off")
 
-set_text(text)
+
+# Power on
+@app.route('/on')
+def website_power_on():
+    change_power("on")
+
+
+if __name__ == "__main__":
+   app.run(host='0.0.0.0', port=80, debug=True)
