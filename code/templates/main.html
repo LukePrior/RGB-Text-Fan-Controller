@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <head>
+        <title>RGB Text Fan Controller</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+            input[type=button], input[type=submit], input[type=reset] {
+              border: none;
+              color: white;
+              padding: 16px 32px;
+              text-decoration: none;
+              margin: 4px 2px;
+              cursor: pointer;
+            }
+            input[type=text], select {
+              width: 100%;
+              padding: 12px 20px;
+              margin: 8px 0;
+              display: inline-block;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              box-sizing: border-box;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1 style = "text-align: center">Fan Controller</h1>
+        <input style = "background-color: green; width: 100%" type = "button" id = "onButton" value = "POWER ON" />
+        <input style = "background-color: red; width: 100%" type = "button" id = "offButton" value = "POWER OFF" />
+        <form method="post">
+            <input style = "width: 100%" name = "text" type = "text" placeholder = "DIYODE">
+            <input style = "background-color: blue;width: 100%" type = "submit" value = "SET TEXT">
+        </form>
+    </body>
+    <script type=text/javascript>
+        $(function() {
+          $('#onButton').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/on',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+        $(function() {
+          $('#offButton').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/off',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+    </script>
+</html>
