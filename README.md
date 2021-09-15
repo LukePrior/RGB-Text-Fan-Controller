@@ -18,7 +18,7 @@ sudo pip3 install Flask
 The script can be run with:
 
 ```
-sudo python3 main.py"
+sudo python3 main.py
 ```
 
 The website can then be accessed from the Pi's local IP on port 80.
