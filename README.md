@@ -27,7 +27,7 @@ You can find the complete installation and setup guide in the Diyode Magazine ar
 
 # DIYODE Magazine Article
 
-[COMING SOON](https://diyodemag.com)
+[Cool Comments](https://diyodemag.com/projects/raspberry_pi_programmable_usb_rgb_led_message_fan)
 
 # License
 
